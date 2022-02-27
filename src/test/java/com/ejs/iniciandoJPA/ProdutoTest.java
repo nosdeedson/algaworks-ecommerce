@@ -45,14 +45,15 @@ public class ProdutoTest extends EntityManagerTest{
 	@Test
 	public void inserirProduto() {
 		Produto produto = new Produto();
-		produto.setId(2);
 		produto.setDescricao("teste inserçao");
 		produto.setNome("TV tela plana");
 		produto.setPreco(new BigDecimal(3000));
 		entityManager.getTransaction().begin();
 		entityManager.persist(produto);
 		entityManager.getTransaction().commit();
-
+		entityManager.clear();
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assert.assertNotNull(produtoVerificacao);
 	}
 	
 	@Test
