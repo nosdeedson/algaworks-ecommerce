@@ -30,10 +30,11 @@ public class ItemPedidoTest extends EntityManagerTest {
 				
 		ItemPedido itemPedido = new ItemPedido();
 		
-		itemPedido.setPedidoId(pedido.getId());
-		itemPedido.setProdutoId(produto.getId());
+//		itemPedido.setPedidoId(pedido.getId()); chave composta
+//		itemPedido.setProdutoId(produto.getId()); chave composta 
 		itemPedido.setPedido(pedido);
 		itemPedido.setProduto(produto);
+		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
 		
 		entityManager.persist(itemPedido);
 			

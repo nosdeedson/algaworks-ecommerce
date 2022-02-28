@@ -1,0 +1,2 @@
+@Table is not necessary when we use iheritance strategy single table
+with single table we have to specify the discriminator colunm and the values for which class in the hierarchy

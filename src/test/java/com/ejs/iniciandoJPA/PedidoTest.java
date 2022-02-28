@@ -30,14 +30,10 @@ public class PedidoTest extends EntityManagerTest{
 		ItemPedido ip = new ItemPedido();
 		ip.setProduto(produto);
 		ip.setQuantidade(1);
-		ip.setPedidoId(pedido.getId());
-		ip.setProdutoId(produto.getId());
 		
 		ItemPedido ip2 = new ItemPedido();
 		ip2.setProduto(produto2);
 		ip2.setQuantidade(1);
-		ip2.setPedidoId(pedido.getId());
-		ip2.setProdutoId(produto2.getId());
 		
 		
 		for (ItemPedido itemPedido : Arrays.asList(ip, ip2)) {
@@ -47,10 +43,10 @@ public class PedidoTest extends EntityManagerTest{
 		
 		entityManager.getTransaction().begin();
 		Pedido pedidoBD = entityManager.merge(pedido);
-		ip.setPedidoId(pedidoBD.getId());
+		ip.setId(new ItemPedidoId(pedidoBD.getId(), produto.getId()));
 		ip.setPedido(pedidoBD);
-		ip2.setPedidoId(pedidoBD.getId());
 		ip2.setPedido(pedidoBD);
+		ip2.setId(new ItemPedidoId(pedidoBD.getId(), produto.getId()));
 		entityManager.persist(ip);
 		entityManager.persist(ip2);
 		entityManager.getTransaction().commit();

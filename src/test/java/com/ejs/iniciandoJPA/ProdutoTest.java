@@ -1,11 +1,18 @@
 package com.ejs.iniciandoJPA;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ejs.entityManager.EntityManagerTest;
+import com.ejs.model.CaracteristicaProduto;
 import com.ejs.model.Produto;
 
 public class ProdutoTest extends EntityManagerTest{
@@ -76,5 +83,58 @@ public class ProdutoTest extends EntityManagerTest{
 		Assert.assertNull(deletar);
 	}
 	
+	@Test
+	public void saveFoto() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		
+		ClassLoader loader = getClass().getClassLoader();
+		
+		try {
+			produto.setFoto(loader.getSystemResourceAsStream("teste.png").readAllBytes());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		entityManager.getTransaction().begin();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+		
+		produto= entityManager.find(Produto.class, 1);
+		Assert.assertNotNull(produto.getFoto());
+		
+//        try {
+//            OutputStream out = new FileOutputStream(
+//                    Files.createFile(Paths.get("/home/edson/Imagens/foto.jpg")).toFile());
+//            out.write(produto.getFoto());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+      
+	}
+	
+	@Test
+	public void setTags() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setTags(Arrays.asList("e-book","livro-digital"));
+		entityManager.getTransaction().begin();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+		
+		produto = entityManager.find(Produto.class, 1);
+		
+		Assert.assertFalse(produto.getTags().isEmpty());
+	}
+	
+	@Test
+	public void setCaracteristicas() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setCaracteristica(Arrays.asList(new CaracteristicaProduto("tela", "320X600"), 
+				new CaracteristicaProduto("Processador", "não tenho ideia")));
+				
+		entityManager.getTransaction().begin();
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+		produto = entityManager.find(Produto.class, 1);
+		Assert.assertNotNull(produto.getCaracteristica());
+	}
 
 }

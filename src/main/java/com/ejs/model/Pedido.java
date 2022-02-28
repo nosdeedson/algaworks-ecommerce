@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -15,9 +14,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -61,7 +60,6 @@ public class Pedido extends GenericEntity {
 	private BigDecimal total;
 	
 	@OneToMany(mappedBy = "pedido")
-	@Column(name = "itens_pedido")
 	private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
 	
 	
@@ -69,17 +67,10 @@ public class Pedido extends GenericEntity {
 	private EnderecoEntregaPedido enderecoEntrega;
 	
 	@OneToOne(mappedBy = "pedido")
-	private PagamentoCartao pagamentoCartao;
+	private Pagamento pagamento;
 	
 	public boolean isPago() {
 		return StatusPedido.PAGO.equals(this.status);
-	}
-
-//	@PrePersist
-	public void setTotal() {
-		for (ItemPedido itemPedido : itensPedido) {
-			this.total.add(itemPedido.getProduto().getPreco().multiply(new BigDecimal(itemPedido.getQuantidade())));
-		}
 	}
 		
 	

@@ -15,7 +15,7 @@ public class NotaFiscalTest extends EntityManagerTest{
 		
 		NotaFiscal nf = new NotaFiscal();
 		nf.setPedido(pedido);
-		nf.setXml("teste");
+		nf.setXml("teste".getBytes());
 		entityManager.getTransaction().begin();
 		entityManager.persist(nf);
 		entityManager.getTransaction().commit();
