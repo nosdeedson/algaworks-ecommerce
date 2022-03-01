@@ -21,6 +21,7 @@ public class Estoque extends GenericEntity {
 	@JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name= "fk_estoque_X_produto"))
 	private Produto produto;
 	
+	
 	private Integer quantidade;
 	
 }

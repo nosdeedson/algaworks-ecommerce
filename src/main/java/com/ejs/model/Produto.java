@@ -11,12 +11,14 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.ForeignKey;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import listener.GenericListener;
 import lombok.Getter;
@@ -26,13 +28,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @EntityListeners({GenericListener.class})
-@Table(name = "produto")
+@Table(name = "produto", uniqueConstraints = @UniqueConstraint(columnNames = {"nome"}, name = "uk_produto_nome"),
+		indexes = @Index(columnList = "nome", name = "idx_produto_nome"))
 public class Produto extends GenericEntity {
 	
+	@Column(nullable = false, length = 100)
     private String nome;
     
     private String descricao;
     
+    @Column(nullable = false)
     private BigDecimal preco;
     
     @Lob

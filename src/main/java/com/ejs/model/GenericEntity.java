@@ -31,7 +31,7 @@ public class GenericEntity {
 	private LocalDateTime dataAtualizacao;
 	
 	@CreationTimestamp
-	@Column(name = "data_criacao", updatable = false) // updatable (false don't permit to update, true permit to update, default value true)
+	@Column(name = "data_criacao", updatable = false, nullable = false) // updatable (false don't permit to update, true permit to update, default value true)
 	private LocalDateTime dataCriacao;
 	
 	

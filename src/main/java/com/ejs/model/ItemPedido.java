@@ -1,5 +1,6 @@
 package com.ejs.model;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -32,6 +33,7 @@ public class ItemPedido {
 			foreignKey = @ForeignKey(name = "fk_item_pedido_X_produto"))
 	private Produto produto;
 	
+	@Column(nullable = false)
 	private Integer quantidade;
 
 }

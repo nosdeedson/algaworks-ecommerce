@@ -14,7 +14,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -41,7 +40,7 @@ public class Pedido extends GenericEntity {
 	private Cliente cliente;
 	
 	@CreationTimestamp
-	@Column(name = "data_criacao")
+	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao;
 	
 	@UpdateTimestamp
@@ -57,6 +56,7 @@ public class Pedido extends GenericEntity {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 	
+	@Column(nullable = false)
 	private BigDecimal total;
 	
 	@OneToMany(mappedBy = "pedido")

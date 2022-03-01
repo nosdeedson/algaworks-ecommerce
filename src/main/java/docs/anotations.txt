@@ -1,0 +1,11 @@
+@Table is not necessary when we use iheritance strategy single table
+with single table we have to specify the discriminator colunm and the values for which class in the hierarchy
+
+@Id
+@GeneratedValue(strategy = GenerationType.SEQUENCE) // don't use identity for single table
+private Integer id;
+
+
+	
+@MapsId this anotation makes the atribute to be the primary key in the table,usally used with EmbededeId
+

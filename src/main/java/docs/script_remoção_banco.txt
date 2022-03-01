@@ -1,0 +1,58 @@
+/*estou usando os metadados das classes para o drop e create*/
+
+/*mesmo caso do script de criação*/
+
+
+   /*alter table caracteristica_produto  drop foreign key fk_caracteristica_X_produto;
+    
+    alter table categoria drop foreign key fk_categoria_x_categoria_pai;
+    
+    alter table cliente_contatos  drop  foreign key fk_cliente_X_contato;
+    
+    alter table cliente_detalhe drop  foreign key cliente_X_cliente_detalhe;
+    
+    alter table estoque drop foreign key fk_estoque_X_produto;
+    
+    alter table item_pedido drop foreign key fk_item_pedido_X_pedido;
+
+    alter table item_pedido drop foreign key fk_item_pedido_X_produto;
+    
+    alter table nota_fiscal drop foreign key fk_nota_fiscal_X_pedido;
+    
+    alter table pagamento drop foreign key fk_pagamento_X_pedido; 
+    
+    alter table pedido drop foreign key fk_pedido_X_cliente;
+    
+    alter table produto_categoria drop foreign key fk_categoria_id;
+    
+    alter table produto_categoria  drop foreign key fk_produto_id;
+    
+    alter table tag_produto drop  foreign key fk_tag_X_produto;
+    
+    drop table if exists caracteristica_produto;
+    
+    drop table if exists categoria;
+    
+    drop table if exists cliente; 
+    
+    drop table if exists cliente_contatos;
+    
+    drop table if exists cliente_detalhe;
+    
+    drop table if exists estoque;
+    
+    drop table if exists item_pedido;
+    
+    drop table if exists nota_fiscal;
+    
+    drop table if exists pagamento;
+    
+    drop table if exists pedido;
+    
+    drop table if exists produto; 
+    
+    drop table if exists produto_categoria;
+    
+    drop table if exists tag_produto;
+	
+	*/
