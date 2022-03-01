@@ -13,6 +13,23 @@ import com.ejs.model.enums.StatusPedido;
 
 public class ItemPedidoTest extends EntityManagerTest {
 	
+	@Test
+	public void removeItemPedido() {
+		/*as this 'pedido' has two 'itemPedido' the remove will fail when the JPA tries to remove 'pedido' 
+		 * this remove will work if I take off the cascade remove from the ''pedido' in 'itemPedido' */
+		ItemPedido itemPedido = entityManager.find(ItemPedido.class, new ItemPedidoId(1, 1));
+		
+		entityManager.getTransaction().begin();
+		try {
+			entityManager.remove(itemPedido);
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		
+	}
+	
 	
 	@Test
 	public void save() {

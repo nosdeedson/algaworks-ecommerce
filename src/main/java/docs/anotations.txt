@@ -5,7 +5,9 @@ with single table we have to specify the discriminator colunm and the values for
 @GeneratedValue(strategy = GenerationType.SEQUENCE) // don't use identity for single table
 private Integer id;
 
-
-	
 @MapsId this anotation makes the atribute to be the primary key in the table,usally used with EmbededeId
 
+orphanRemoval delete de childrens of an object, like 'pedido' has 'itemPedido' if I use this anotation when a remove
+the 'pedido' the 'itemPedido' will be removed too. This anotation works like a cascade remove.
+
+This anotaion just works with we use the cascade type persist, otherwise this won't work

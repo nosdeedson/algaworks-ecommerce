@@ -15,9 +15,13 @@ insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-
 insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-02-01'),  1,  10.0, 'AGUARDANDO');
 
 insert into item_pedido (pedido_id, produto_id, quantidade) values ( 1, 1, 2);
+insert into item_pedido (pedido_id, produto_id, quantidade) values ( 1, 2, 2);
 
 insert into categoria (data_criacao, nome) values (DATE('2022-02-01'), "Eletrônicos");
 
+insert into produto_categoria (produto_id, categoria_id) values(1, 1);
+
+insert into produto_categoria (produto_id, categoria_id) values(2, 1);
 
 
 

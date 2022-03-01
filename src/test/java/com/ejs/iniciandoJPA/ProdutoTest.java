@@ -1,21 +1,72 @@
 package com.ejs.iniciandoJPA;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.ejs.entityManager.EntityManagerTest;
 import com.ejs.model.CaracteristicaProduto;
+import com.ejs.model.Categoria;
 import com.ejs.model.Produto;
 
 public class ProdutoTest extends EntityManagerTest{
+	
+	@Test
+	public void updateProdutoCascadeCategoria() {
+	
+		/*to work is needed to add de cascade all in the class produto in the atribute categoria*/
+		Produto produto = entityManager.find(Produto.class, 2);
+		produto.setPreco(new BigDecimal(1500));
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		produto.getCategorias().forEach(cat -> {
+			Categoria categoriaPai = cat;
+			Categoria categoriaFilha = new Categoria("Tablet");
+			categoriaFilha.setCategoriaPai(categoriaPai);
+			categorias.add(categoriaFilha);
+		});
+		produto.setCategorias(categorias);
+		entityManager.getTransaction().begin();
+		produto = entityManager.merge(produto);
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+		
+		Assert.assertEquals("Tablet", produto.getCategorias().get(0).getNome());
+	}
+	
+	@Test
+	public void saveProdutoCascadeCategoria() {
+		Categoria categoriaPai = new Categoria("Esportes");
+		
+		Categoria categoriaFilha = new Categoria("Futebol");
+		categoriaFilha.setCategoriaPai(categoriaPai);
+		
+		Produto produto = new Produto();
+		produto.setCategorias(Arrays.asList(categoriaFilha));
+		produto.setDescricao("bola de futebol");
+		produto.setNome("bola");
+		produto.setPreco(BigDecimal.TEN);
+		
+		categoriaFilha.setProdutos(Arrays.asList(produto));
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(categoriaPai);
+		entityManager.persist(produto);
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		Produto produtoValidar = entityManager.find(Produto.class, produto.getId());
+		
+		Assert.assertNotNull(produtoValidar.getCategorias());
+		Assert.assertFalse(produto.getCategorias().get(0).getCategoriaPai() == null);
+	}
+	
 		
 	@Test
 	public void consultandoProduto() {
@@ -65,24 +116,21 @@ public class ProdutoTest extends EntityManagerTest{
 	
 	@Test
 	public void removerProduto() {
-		Produto produto = new Produto();
-		produto.setId(2);
-		produto.setDescricao("teste inserçao");
-		produto.setNome("TV tela plana");
-		produto.setPreco(new BigDecimal(3000));
+		Produto produto = entityManager.find(Produto.class, 2);
 		entityManager.getTransaction().begin();
-		entityManager.persist(produto);
-		entityManager.flush();
+		entityManager.remove(produto);
 		entityManager.getTransaction().commit();
-		Produto deletar = entityManager.find(Produto.class, 2);
-		entityManager.getTransaction().begin();
-		entityManager.remove(deletar);
-		entityManager.getTransaction().commit();
-		deletar = entityManager.find(Produto.class, 2);
+		entityManager.clear();
 		
+		Produto deletar = entityManager.find(Produto.class, 2);
 		Assert.assertNull(deletar);
+		
+		Categoria categoria = entityManager.find(Categoria.class, 1);
+		Assert.assertNotNull(categoria);
+		
 	}
 	
+	@SuppressWarnings("static-access")
 	@Test
 	public void saveFoto() {
 		Produto produto = entityManager.find(Produto.class, 1);

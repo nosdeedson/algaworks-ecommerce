@@ -15,15 +15,21 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "categoria", uniqueConstraints = @UniqueConstraint(columnNames = {"nome"}, name = "uk_categoria_nome"),
 		indexes = @Index(columnList = "nome", name = "idx_categoria_nome"))
 public class Categoria extends GenericEntity {
-	
+		
+	public Categoria(String nome) {
+		this.nome = nome;
+	}
+
 	@Column(nullable = false, length = 100)
 	private String nome;
 	

@@ -1,0 +1,6 @@
+ <property name="javax.persistence.schema-generation.scripts.action"
+                      value="none"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target"
+                      value="C:/tmp/sql/script-criacao-exportado.sql"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target"
+                      value="C:/tmp/sql/script-remocao-exportado.sql"/>

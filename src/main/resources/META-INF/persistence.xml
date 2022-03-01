@@ -28,7 +28,7 @@
                       value="META-INF/banco-de-dados/script-remocao.sql"/>
 <!--              acima as propriedaddes pra criação e remoção do banco          -->
             
-<!--             <property name="javax.persistence.sql-load-script-source" value="META-INF/banco-de-dados/dados-iniciais.sql"/> -->
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/banco-de-dados/dados-iniciais.sql"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
 
