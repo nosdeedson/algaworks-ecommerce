@@ -1,6 +1,5 @@
 package com.ejs.iniciandoJPA;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.junit.Assert;

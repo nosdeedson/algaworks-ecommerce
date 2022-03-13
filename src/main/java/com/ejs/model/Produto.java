@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -26,6 +28,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Produto.listar", query = "SELECT p FROM Produto p"),
+	@NamedQuery(name =  "ProdutoByCategoria", query = "SELECT p FROM Produto p WHERE EXISTS  ( SELECT 1 FROM Categoria c INNER JOIN c.produtos p2 WHERE p2=p AND c.id= :categoria)")
+})
 @EntityListeners({GenericListener.class})
 @Table(name = "produto", uniqueConstraints = @UniqueConstraint(columnNames = {"nome"}, name = "uk_produto_nome"),
 		indexes = @Index(columnList = "nome", name = "idx_produto_nome"))

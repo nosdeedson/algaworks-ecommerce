@@ -13,7 +13,13 @@
             
             <property name="hibernate.connection.autocommit" value="true" />
 
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+<!-- 				a propriedade abaixo drop e cria o banco  -->
+<!--             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+
+
+<!--            a propriedade a baixo faz com que o banco não seja recriado -->
+            <property name="javax.persistence.schema-generation.database.action" value="none"/> 
+            
             
 <!--             as duas propriedades abaixo permite que o JPA use os metadados das classes e depois os scripts referenciados nas próximas duas propiedades -->
              <property name="javax.persistence.schema-generation.create-source"

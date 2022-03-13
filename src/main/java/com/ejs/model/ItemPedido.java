@@ -1,5 +1,7 @@
 package com.ejs.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -32,6 +34,9 @@ public class ItemPedido {
 	@JoinColumn(name = "produto_id",
 			foreignKey = @ForeignKey(name = "fk_item_pedido_X_produto"))
 	private Produto produto;
+	
+	@Column(name = "preco_produto", nullable = false)
+	private BigDecimal precoProduto;
 	
 	@Column(nullable = false)
 	private Integer quantidade;

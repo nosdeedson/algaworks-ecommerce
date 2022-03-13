@@ -11,6 +11,8 @@ import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,6 +41,7 @@ public class NotaFiscal {
 	private byte[] xml;
 	
 	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_emissao")
 	private Date dataEmissao;
 	
