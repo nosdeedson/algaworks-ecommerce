@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 import org.junit.Assert;
@@ -13,6 +14,11 @@ import org.junit.Test;
 import com.ejs.entityManager.EntityManagerTest;
 import com.ejs.model.Pedido;
 import com.ejs.model.Pedido_;
+import com.ejs.model.ItemPedido;
+import com.ejs.model.ItemPedido_;
+import com.ejs.model.Pedido;
+import com.ejs.model.Pedido_;
+import com.ejs.model.Produto_;
 
 public class PedidoCriteriaTest extends EntityManagerTest {
 

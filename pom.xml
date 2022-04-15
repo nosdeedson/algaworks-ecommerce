@@ -38,6 +38,15 @@
 			<version>1.18.8</version>
 			<scope>provided</scope>
 		</dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.4.10.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
