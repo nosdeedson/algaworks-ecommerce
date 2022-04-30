@@ -144,27 +144,7 @@ public class ClienteCriteriaTest extends EntityManagerTest {
 		Assert.assertFalse(clientes.isEmpty());
 		
 		clientes.forEach(c -> System.out.println(c.getNome()));
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }
 

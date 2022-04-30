@@ -573,22 +573,4 @@ public class PedidoCriteriaTest extends EntityManagerTest {
 		pedidos.forEach(p -> System.out.println("id: " + p.getId()));
 		Assert.assertFalse(pedidos.isEmpty());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

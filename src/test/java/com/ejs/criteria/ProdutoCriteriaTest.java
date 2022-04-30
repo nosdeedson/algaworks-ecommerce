@@ -426,26 +426,6 @@ public class ProdutoCriteriaTest extends EntityManagerTest {
 		int deletados = query.executeUpdate();
 		Assert.assertTrue(deletados > 0);
 		entityManager.getTransaction().commit();
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }

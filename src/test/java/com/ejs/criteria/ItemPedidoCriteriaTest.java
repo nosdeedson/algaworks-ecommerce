@@ -54,20 +54,5 @@ public class ItemPedidoCriteriaTest extends EntityManagerTest {
 		
 		Assert.assertFalse(list.isEmpty());
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
