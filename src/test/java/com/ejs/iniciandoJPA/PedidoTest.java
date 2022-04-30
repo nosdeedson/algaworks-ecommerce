@@ -3,6 +3,13 @@ package com.ejs.iniciandoJPA;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +19,7 @@ import com.ejs.model.Cliente;
 import com.ejs.model.ItemPedido;
 import com.ejs.model.ItemPedidoId;
 import com.ejs.model.Pedido;
+import com.ejs.model.Pedido_;
 import com.ejs.model.Produto;
 import com.ejs.model.enums.SexoCliente;
 import com.ejs.model.enums.StatusPedido;

@@ -13,26 +13,23 @@
             
             <property name="hibernate.connection.autocommit" value="true" />
 
-<!-- 				a propriedade abaixo drop e cria o banco  -->
-<!--             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+<!-- 			permite deletar o bando de dados e recriá-lo -->
+<!-- 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+			
+<!-- 			faz com que o banco não seja recriado -->
+			<property name="javax.pesistence.schema-generation.database.action" value="none"/>
 
-
-<!--            a propriedade a baixo faz com que o banco não seja recriado -->
-            <property name="javax.persistence.schema-generation.database.action" value="none"/> 
+<!--            faz com que o JPA use os metadados das classes depois os scripts existentes -->
+            <property name="javax.persistence.schema-generation.create-source" value="metadata-then-script"/>
             
+<!--          faz com que o JPA use os metadados das classes depois o scripts  existentes-->
+            <property name="javax.persistence.schema-generation.drop-source" value="metadata-then-script"/>
             
-<!--             as duas propriedades abaixo permite que o JPA use os metadados das classes e depois os scripts referenciados nas próximas duas propiedades -->
-             <property name="javax.persistence.schema-generation.create-source"
-                      value="metadata-then-script"/>
-            <property name="javax.persistence.schema-generation.drop-source"
-                      value="metadata-then-script"/>
+<!--             faz com que o JPA use o script de criação  -->
+            <property name="javax.persistence.schema-generation.create-script-source" value="META-INF/banco-de-dados/script-criacao.sql"/>
             
-<!--             propriedades para usar arquivos sql para criação e remoção do banco de dados -->
-            <property name="javax.persistence.schema-generation.create-script-source"
-                      value="META-INF/banco-de-dados/script-criacao.sql"/>
-            <property name="javax.persistence.schema-generation.drop-script-source"
-                      value="META-INF/banco-de-dados/script-remocao.sql"/>
-<!--              acima as propriedaddes pra criação e remoção do banco          -->
+<!--             faz com que o JPA use o script de remoção -->
+            <property name="javax.persistence.schema-generation.drop-script-source" value="META-INF/banco-de-dados/script-remocao.sql"/>
             
             <property name="javax.persistence.sql-load-script-source" value="META-INF/banco-de-dados/dados-iniciais.sql"/>
 

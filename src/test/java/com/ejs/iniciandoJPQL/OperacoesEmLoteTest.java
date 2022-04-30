@@ -30,7 +30,7 @@ public class OperacoesEmLoteTest extends EntityManagerTest {
 	@Test
 	public void updateProdutos() {
 		String jpql = "UPDATE Produto p set p.preco= (p.preco + p.preco * 0.1)"
-				+ " WHERE p.id between 20 and 27 ";
+				+ " WHERE p.id between 1 and 2 ";
 		
 		Query query = entityManager.createQuery(jpql);
 		entityManager.getTransaction().begin();

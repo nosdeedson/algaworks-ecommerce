@@ -59,7 +59,7 @@ public class Produto extends GenericEntity {
     @Column(name = "tag", length = 50)
     private List<String> tags = new ArrayList<String>();
     
-    /*don't make sende to remove categoria with cascade all, because another 'produto' can be related with the 'categoria'*/
+    /*don't make sense to remove categoria with cascade all, because another 'produto' can be related with the 'categoria'*/
     @ManyToMany // the categoria is the owner of the relationshiop
     @JoinTable(name = "produto_categoria", 
     joinColumns = @JoinColumn(name = "produto_id", foreignKey = @ForeignKey(name = "fk_produto_id")),

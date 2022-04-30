@@ -13,9 +13,9 @@ insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-
 
 insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-01-01'),  1,  2800, 'AGUARDANDO');
 
-insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-12-20'),  2,  7000, 'AGUARDANDO');
+insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2021-12-20'),  2,  7000, 'AGUARDANDO');
 
-insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2022-12-20'),  1,  799, 'PAGO');
+insert into pedido (data_criacao, cliente_id, total, status) values (DATE('2021-12-20'),  1,  799, 'PAGO');
 
 insert into item_pedido (pedido_id, produto_id, quantidade, preco_produto) values ( 1, 1, 2, 499);
 insert into item_pedido (pedido_id, produto_id, quantidade, preco_produto) values ( 1, 2, 2, 1400);
@@ -26,7 +26,13 @@ insert into item_pedido (pedido_id, produto_id, quantidade, preco_produto) value
 
 insert into item_pedido (pedido_id, produto_id, quantidade, preco_produto) values ( 4, 1, 1, 799);
 
-insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_barra, data_criacao) values (2, 'PROCESSANDO', 'cartao', '123', null, DATE('2022-02-01'));
+insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_barra, data_criacao) values (1, 'PROCESSANDO', 'cartao', '123', null, DATE('2022-02-01'));
+
+insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_barra, data_criacao) values (2, 'PROCESSANDO', 'cartao', '4567', null, DATE('2022-02-01'));
+
+insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_barra, data_criacao) values (3, 'RECEBIDO', 'boleto', null, '8910', DATE('2022-02-01'));
+
+insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_barra, data_criacao) values (4, 'PROCESSANDO', 'cartao', '1112', null, DATE('2022-02-01'));
 
 insert into nota_fiscal (pedido_id, data_emissao, xml) values(1, DATE('2022-02-01'), '<xml\>');
 
