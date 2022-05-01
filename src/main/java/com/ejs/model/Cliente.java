@@ -15,9 +15,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedStoredProcedureQueries;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,6 +33,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@NamedStoredProcedureQueries({
+	@NamedStoredProcedureQuery(
+				name = "compraram_acima_media", procedureName = "compraram_acima_media",
+				parameters = {
+						@StoredProcedureParameter(name="ano", mode = ParameterMode.IN, type = Integer.class)
+				},
+				resultClasses = Cliente.class
+			)
+})
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"),
 		foreignKey = @ForeignKey(name= "cliente_X_cliente_detalhe"))
 @Table(name = "cliente", uniqueConstraints = @UniqueConstraint(columnNames = {"cpf"}, name = "uk_cliente_cpf"),

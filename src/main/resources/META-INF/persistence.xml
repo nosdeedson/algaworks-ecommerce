@@ -13,7 +13,7 @@
             
             <property name="hibernate.connection.autocommit" value="true" />
 
-<!-- 			permite deletar o bando de dados e recriá-lo -->
+<!-- 			permite deletar o bando de dados e recria-lo -->
 <!-- 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
 			
 <!-- 			faz com que o banco não seja recriado -->

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -15,11 +17,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.ejs.DTO.ProdutoDTO;
 
 import listener.GenericListener;
 import lombok.Getter;
@@ -28,6 +36,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "queryNativa.produto.listar", resultClass = Produto.class,
+				query = "SELECT * FROM produto"
+			)	
+})
+@SqlResultSetMappings({
+	@SqlResultSetMapping(name = "produto.ProdutoDTO",
+				classes = {
+						@ConstructorResult(
+									targetClass = ProdutoDTO.class,
+									columns = {
+											@ColumnResult(name = "id", type = Integer.class),
+											@ColumnResult(name = "nome", type = String.class)
+									}
+								)
+				}
+			)
+})
 @NamedQueries({
 	@NamedQuery(name = "Produto.listar", query = "SELECT p FROM Produto p"),
 	@NamedQuery(name =  "ProdutoByCategoria", query = "SELECT p FROM Produto p WHERE EXISTS  ( SELECT 1 FROM Categoria c INNER JOIN c.produtos p2 WHERE p2=p AND c.id= :categoria)")
