@@ -22,6 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 import com.ejs.DTO.CategoriaDTO;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,6 +57,7 @@ public class Categoria extends GenericEntity {
 		this.nome = nome;
 	}
 
+	@NotBlank
 	@Column(nullable = false, length = 100)
 	private String nome;
 	

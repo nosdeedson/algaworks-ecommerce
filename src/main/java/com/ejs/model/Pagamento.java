@@ -15,6 +15,7 @@ import javax.persistence.UniqueConstraint;
 
 import com.ejs.model.enums.StatusPagamento;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,10 +33,12 @@ import lombok.Setter;
 @Table(name = "pagamento" , uniqueConstraints = @UniqueConstraint(columnNames = "pedido_id", name = "uk_pagamento_X_pedido"))
 public abstract class Pagamento extends GenericEntity{
 
+	@NotNull
 	@OneToOne(optional = false)
 	@JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name= "fk_pagamento_X_pedido"))
 	private Pedido pedido;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private StatusPagamento status;
 }

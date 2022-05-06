@@ -25,8 +25,12 @@ import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.ejs.model.enums.SexoCliente;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,9 +52,12 @@ import lombok.Setter;
 		indexes = @Index(columnList = "nome", name = "idx_nome" ))
 public class Cliente extends GenericEntity {
 	
+	@NotBlank
 	@Column(length = 100, nullable = false)
 	private String nome;
 	
+	@NotBlank
+	@CPF
 	@Column(length = 14, nullable = false)
 	private String cpf;
 	
@@ -58,6 +65,7 @@ public class Cliente extends GenericEntity {
 	@Enumerated(EnumType.STRING)
 	private SexoCliente sexo;
 	
+	@Past
 	@Column(table = "cliente_detalhe", name = "data_nascimento")
 	private LocalDateTime dataNascimento;
 	

@@ -17,6 +17,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +34,7 @@ public class NotaFiscal {
 	@Id
 	private Integer id;
 	
+	@NotNull
 	@MapsId
 	@OneToOne(optional = false) // the notaFiscal is the owner of the relationship
 	@JoinColumn(name = "pedido_id", foreignKey = @ForeignKey(name="fk_nota_fiscal_X_pedido"))
@@ -40,6 +43,7 @@ public class NotaFiscal {
 	@Lob
 	private byte[] xml;
 	
+	@PastOrPresent
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_emissao")

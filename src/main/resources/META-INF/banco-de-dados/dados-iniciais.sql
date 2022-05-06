@@ -1,6 +1,6 @@
-insert into produto (data_criacao, nome, preco, descricao) values (DATE('2022-02-01'), 'Kindle', 799.0, 'Conheça o novo Kindle, agora com iluminação embutida ajustável, que permite que você leia em ambientes abertos ou fechados, a qualquer hora do dia.');
-insert into produto (data_criacao, nome, preco, descricao) values (DATE('2022-02-01'), 'Câmera GoPro Hero 7', 1400.0, 'Desempenho 2x melhor.');
-insert into produto (data_criacao, nome, preco, descricao) values (DATE('2022-02-01'), 'Câmera Canon 80D', 3500, 'melhor foco');
+insert into produto (data_criacao, nome, preco, descricao, ativo) values (DATE('2022-02-01'), 'Kindle', 799.0, 'Conheça o novo Kindle, agora com iluminação embutida ajustável, que permite que você leia em ambientes abertos ou fechados, a qualquer hora do dia.', 'Sim');
+insert into produto (data_criacao, nome, preco, descricao, ativo) values (DATE('2022-02-01'), 'Câmera GoPro Hero 7', 1400.0, 'Desempenho 2x melhor.', 'Nao');
+insert into produto (data_criacao, nome, preco, descricao, ativo) values (DATE('2022-02-01'), 'Câmera Canon 80D', 3500, 'melhor foco', 'Sim');
 
 insert into cliente (nome, data_criacao, cpf) values('Fernando Medeiros', Date('2022-02-01'), '00000000001');
 insert into cliente (nome, data_criacao, cpf) values('Marcos Mariano', Date('2022-02-01'), '00000000002');

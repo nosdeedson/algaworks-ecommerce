@@ -8,6 +8,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -28,7 +29,12 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.ejs.DTO.ProdutoDTO;
+import com.ejs.util.converter.BooleanToSimNaoConverter;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import listener.GenericListener;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,11 +69,15 @@ import lombok.Setter;
 		indexes = @Index(columnList = "nome", name = "idx_produto_nome"))
 public class Produto extends GenericEntity {
 	
+	@NotBlank
 	@Column(nullable = false, length = 100)
     private String nome;
     
+	@NotEmpty
     private String descricao;
     
+	@Positive
+	@NotNull
     @Column(nullable = false)
     private BigDecimal preco;
     
@@ -94,5 +104,10 @@ public class Produto extends GenericEntity {
     
     @OneToOne(mappedBy = "produto")
     private Estoque estoque;
+    
+    @Convert(converter = BooleanToSimNaoConverter.class)
+    @NotNull
+    @Column(length = 3, nullable = false)
+    private Boolean ativo = Boolean.FALSE;
 
 }
