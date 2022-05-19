@@ -21,8 +21,8 @@
             <version>5.4.10.Final</version>
         </dependency>
         
-        <!-->Usada para tirar os erros do SLF4J-->
-	<!--	<dependency>
+        <!-- Usada para tirar os erros do SLF4J -->
+        <!--	    <dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.11</version>
@@ -72,7 +72,25 @@
             <scope>provided</scope>
         </dependency>
 
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-testing</artifactId>
+            <version>5.4.10.Final</version>
+            <scope>test</scope>
+        </dependency>
+       <!-- cache profissional 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
+            <version>5.4.10.Final</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+ -->
     </dependencies>
 
     <build>
