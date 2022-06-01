@@ -52,7 +52,7 @@ import lombok.Setter;
 @Table(name = "categoria", uniqueConstraints = @UniqueConstraint(columnNames = {"nome"}, name = "uk_categoria_nome"),
 		indexes = @Index(columnList = "nome", name = "idx_categoria_nome"))
 public class Categoria extends GenericEntity {
-		
+	
 	public Categoria(String nome) {
 		this.nome = nome;
 	}

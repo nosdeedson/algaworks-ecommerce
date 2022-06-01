@@ -27,5 +27,6 @@ public class ItemPedidoId implements Serializable {
 	
 	@EqualsAndHashCode.Include
 	@Column(name = "produto_id")
-	private Integer produtoId;
+	private Integer produtoId;	
+	
 }

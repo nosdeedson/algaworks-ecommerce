@@ -8,10 +8,10 @@
 			<shared-cache-mode>ALL</shared-cache-mode>
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost/algaworks_ecommerce?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="root" />
+                      value="jdbc:postgresql://localhost/algaworks_ecommerce?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="root" />
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             
             <property name="hibernate.hikari.maximumPoolSize" value="8" />
             <property name="hibernate.connection.provider_class"
@@ -47,7 +47,7 @@
             
             <property name="javax.persistence.sql-load-script-source" value="META-INF/banco-de-dados/dados-iniciais.sql"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="false" />

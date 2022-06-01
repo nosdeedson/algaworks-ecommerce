@@ -190,10 +190,14 @@ public class LockPessimistaTest {
 			 * Usando os locks com está a seguna thread será travada no select, apoś finalizar a 
 			 * thread 1, ela realizará todo o processo normalmente
 			 */
+			log("runnable carregando produto 1");
 			Produto  produto = entityManager.find(Produto.class, 1, LockModeType.PESSIMISTIC_READ);
+			
+			log("Runnable 1 vai alterar o produto");
+			produto.setDescricao("Runnable 01 " + System.currentTimeMillis());
+			log("Runnable 1 espera 3 segundos");
 			esperar(3);
 			
-			produto.setDescricao("Runnable 01 " + System.currentTimeMillis());
 			log("Runable 1 commit produto");
 			try {
 				entityManager.getTransaction().commit();
@@ -207,19 +211,25 @@ public class LockPessimistaTest {
 		
 		Runnable runnable2 = () ->{
 			log("Runnable 02 está iniciando");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-			entityManager.getTransaction().begin();
-			Produto  produto = entityManager.find(Produto.class, 1, LockModeType.PESSIMISTIC_WRITE);
+			EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+			entityManager2.getTransaction().begin();
+			
+			log("Runnable 2 carregando produto 1");
+			Produto  produto = entityManager2.find(Produto.class, 1, LockModeType.PESSIMISTIC_WRITE);
+
+			log("Runnable 2 altera produto");
+			produto.setDescricao("Runnable 02 " + System.currentTimeMillis());
+			
+			log("Runnable 2 espera 1 segundo");
 			esperar(1);
 			
-			produto.setDescricao("Runnable 02 " + System.currentTimeMillis());
 			log("Runable 2 commit produto");
 			try {
-				entityManager.getTransaction().commit();
+				entityManager2.getTransaction().commit();
 			} catch (Exception e) {
 				System.out.println("/n/n" + e.getMessage() + "\n\n Runnable 02");
 			}
-			entityManager.close();
+			entityManager2.close();
 			log("Runnable 02 salvou produto");
 			
 		};
@@ -238,8 +248,8 @@ public class LockPessimistaTest {
 			e.printStackTrace();
 		}
 		
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Produto produtoAlterado = entityManager.find(Produto.class, 1);
+		EntityManager entityManager3 = entityManagerFactory.createEntityManager();
+		Produto produtoAlterado = entityManager3.find(Produto.class, 1);
 		
 		System.out.println(produtoAlterado.getDescricao());
 		
@@ -260,7 +270,7 @@ public class LockPessimistaTest {
 			 * um lock para update o select não será executado
 			 */
 			Produto  produto = entityManager.find(
-					Produto.class, 1, LockModeType.PESSIMISTIC_READ);
+					Produto.class, 1, LockModeType.PESSIMISTIC_WRITE);
 			log("runnable 1 espera 3 segundos");
 			esperar(3);
 			
@@ -281,7 +291,7 @@ public class LockPessimistaTest {
 			EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 			entityManager2.getTransaction().begin();
 			Produto  produto = entityManager2.find(
-					Produto.class, 1, LockModeType.PESSIMISTIC_WRITE);
+					Produto.class, 1, LockModeType.PESSIMISTIC_READ);
 			produto.setDescricao("Runnable 02 " + System.currentTimeMillis());
 			esperar(1);
 			
@@ -320,7 +330,83 @@ public class LockPessimistaTest {
 		log("Método finalizou");
 	}
 	
-	
+	@Test
+	public void codigoProfessor() {
+		Runnable runnable1 = () -> {
+            log("Iniciando Runnable 01.");
+
+            String novaDescricao = "Descrição detalhada. CTM Runnable 1: " + System.currentTimeMillis();
+
+            EntityManager entityManager1 = entityManagerFactory.createEntityManager();
+            entityManager1.getTransaction().begin();
+
+            log("Runnable 01 vai carregar o produto 1.");
+            Produto produto = entityManager1.find(
+                    Produto.class, 1, LockModeType.PESSIMISTIC_READ);
+
+            log("Runnable 01 vai alterar o produto.");
+            produto.setDescricao(novaDescricao);
+
+            log("Runnable 01 vai esperar por 3 segundo(s).");
+            esperar(3);
+
+            log("Runnable 01 vai confirmar a transação.");
+            entityManager1.getTransaction().commit();
+            entityManager1.close();
+
+            log("Encerrando Runnable 01.");
+        };
+
+        Runnable runnable2 = () -> {
+            log("Iniciando Runnable 02.");
+
+            String novaDescricao = "Descrição massa! CTM Runnable 2: " + System.currentTimeMillis();
+
+            EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+            entityManager2.getTransaction().begin();
+
+            log("Runnable 02 vai carregar o produto 2.");
+            Produto produto = entityManager2.find(
+                    Produto.class, 1, LockModeType.PESSIMISTIC_WRITE);
+
+            log("Runnable 02 vai alterar o produto.");
+            produto.setDescricao(novaDescricao);
+
+            log("Runnable 02 vai esperar por 1 segundo(s).");
+            esperar(1);
+
+            log("Runnable 02 vai confirmar a transação.");
+            entityManager2.getTransaction().commit();
+            entityManager2.close();
+
+            log("Encerrando Runnable 02.");
+        };
+
+        Thread thread1 = new Thread(runnable1);
+        Thread thread2 = new Thread(runnable2);
+
+        thread1.start();
+
+        esperar(1);
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        EntityManager entityManager3 = entityManagerFactory.createEntityManager();
+        Produto produto = entityManager3.find(Produto.class, 1);
+        entityManager3.close();
+        
+        System.out.println(produto.getDescricao());
+
+        Assert.assertTrue(produto.getDescricao().startsWith("Descrição detalhada."));
+
+        log("Encerrando método de teste.");
+	}
 	
 	
 	
