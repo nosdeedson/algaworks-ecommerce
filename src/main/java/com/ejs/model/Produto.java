@@ -73,12 +73,12 @@ public class Produto extends GenericEntity {
 	@Column(nullable = false, length = 100)
     private String nome;
     
-	@NotEmpty
+//	@NotEmpty
     private String descricao;
     
-	@Positive
-	@NotNull
-    @Column(nullable = false)
+//	@Positive
+//	@NotNull
+    @Column(nullable = true)
     private BigDecimal preco;
     
     @Lob
@@ -106,8 +106,8 @@ public class Produto extends GenericEntity {
     private Estoque estoque;
     
     @Convert(converter = BooleanToSimNaoConverter.class)
-    @NotNull
-    @Column(length = 3, nullable = false)
+//    @NotNull
+    @Column(length = 3, nullable = true)
     private Boolean ativo = Boolean.FALSE;
 
 }
